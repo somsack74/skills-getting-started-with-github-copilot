@@ -19,27 +19,33 @@ document.addEventListener("DOMContentLoaded", () => {
         activityCard.className = "activity-card";
 
         const spotsLeft = details.max_participants - details.participants.length;
+        const escapeHtml = (value) =>
+          String(value).replace(/[&<>"']/g, (ch) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[ch]));
+
         const participantsListItems = details.participants.length
           ? details.participants
-              .map(
-                (participant) => `
+              .map((participant) => {
+                const safeParticipant = escapeHtml(participant);
+                const safeActivityName = escapeHtml(name);
+
+                return `
                   <li class="participant-item">
-                    <span class="participant-email">${participant}</span>
+                    <span class="participant-email">${safeParticipant}</span>
                     <button
                       type="button"
                       class="remove-participant-btn"
-                      data-activity="${name}"
-                      data-email="${participant}"
-                      aria-label="Unregister ${participant} from ${name}"
+                      data-activity="${encodeURIComponent(name)}"
+                      data-email="${encodeURIComponent(participant)}"
+                      aria-label="Unregister ${safeParticipant} from ${safeActivityName}"
                       title="Unregister participant"
                     >
                       <span aria-hidden="true">&#128465;</span>
                     </button>
                   </li>
-                `
-              )
+                `;
+              })
               .join("")
-          : "<li class=\"empty-participants\">No participants yet</li>";
+          : '<li class="empty-participants">No participants yet</li>';
 
         activityCard.innerHTML = `
           <h4>${name}</h4>
