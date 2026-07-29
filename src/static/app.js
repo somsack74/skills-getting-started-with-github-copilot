@@ -129,7 +129,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     try {
       const response = await fetch(
-        `/activities/${encodeURIComponent(activityName)}/signup?email=${encodeURIComponent(participantEmail)}`,
+        `/activities/${activityName}/signup?email=${participantEmail}`,
         {
           method: "DELETE",
         }
