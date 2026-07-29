@@ -140,6 +140,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (response.ok) {
         messageDiv.textContent = result.message;
         messageDiv.className = "success";
+        activitySelect.options.length = 1;
         await fetchActivities();
       } else {
         messageDiv.textContent = result.detail || "Failed to unregister participant.";
