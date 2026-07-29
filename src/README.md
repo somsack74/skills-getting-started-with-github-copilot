@@ -54,5 +54,5 @@ All data is stored in memory, which means data will be reset when the server res
 From the repository root, run:
 
 ```bash
-.venv/bin/python -m pytest -q
+python -m pytest -q
 ```
