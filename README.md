@@ -15,7 +15,7 @@ Remember, it's self-paced so feel free to take a break! ☕️
 From the repository root, run:
 
 ```bash
-.venv/bin/python -m pytest -q
+python -m pytest -q
 ```
 
 ---
